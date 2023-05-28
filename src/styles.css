@@ -1,0 +1,17 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(76,9,121,1) 35%, rgba(0,212,255,1) 100%); */
+
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgb(0, 0, 8) 0%, rgba(164, 0, 118, 0.99) 100%, rgba(110,28,32,1) 100%, rgb(0, 128, 153) 100%);
+
+
+/* background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 90%, rgba(2,0,36,1) 100%, rgba(0,212,255,1) 100%, rgba(251,251,251,1) 100%); */
+
+color: rgb(251, 245, 234);
+margin: 0;
+font-size: 17px;
+letter-spacing: 1px;
+}

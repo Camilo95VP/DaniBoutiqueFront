@@ -1,0 +1,36 @@
+<!-- carrito.component.html -->
+<div class="contenedor-principal">
+  <div class="cont-msj" *ngIf="carrito.length === 0">
+    <p class="text-car">No tienes productos agragados al carrito.</p>
+    <br>
+    <br>
+    <button (click)="redirigirATienda()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span> Volver a la tienda
+    </button>
+  </div>
+  <div *ngIf="carrito.length > 0">
+    <div class="cont-prod-grid">
+      <div class="cont-producto" *ngFor="let producto of carrito">
+        <h3>{{ producto.nombre }}</h3>
+        <img class="imagen-carrito" [src]="producto.imagen" alt="{{ producto.nombre }}" />
+        <p id="cantidad" >Cantidad a pedir: <span id="cant-span">{{ producto.cantidad }}</span> </p>
+        <p id="color" >Color seleccionado: <span id="col-span">{{ producto.color }}</span></p>
+        <div class="btns-au-dis" >
+          <button (click)="aumentarCantidad(producto)"> <span></span> +</button>
+          <button (click)="disminuirCantidad(producto)"> <span></span> -</button>
+          <button (click)="eliminarProducto(producto)">Eliminar bolso</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="cont-btns">
+      <button id="wpp" (click)="enviarPedido()">Enviar pedido por WhatsApp</button>
+      <button id="vaciar" (click)="vaciarCarrito()">Vaciar carrito</button>
+      <button id="seguir" (click)="redirigirABolsos()">Seguir comprando</button>
+    </div>
+  </div>
+
+</div>

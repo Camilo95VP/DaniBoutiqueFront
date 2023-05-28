@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/dani-boutique",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

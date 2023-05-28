@@ -1,0 +1,215 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
+#categories{
+    cursor: pointer;
+}
+/* Estilo base del select */
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #cccccc65;
+    border-radius: 15px;
+    appearance: none; /* Oculta la apariencia nativa del select */
+    color: rgb(247, 240, 227);
+/* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,9,121,1) 100%, rgba(110,28,32,1) 100%, rgba(0,212,255,1) 100%); */
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(110,9,121,1) 100%, rgba(110,28,32,1) 100%, rgba(0,212,255,1) 100%);
+
+    font-weight: bold;
+  }
+  
+  /* Estilo cuando el select está desplegado */
+  select:focus {
+    outline: none;
+    border-color: #980e85; /* Color del borde cuando el select está enfocado */
+  }
+  
+  /* Estilo de las opciones */
+  option {
+    position: relative;
+    top: 20PX;
+    background-color: #000000;
+  }
+  .opt{
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  /* Estilo de la opción seleccionada */
+  option:checked {
+    background-color: #0366d6; /* Color de fondo de la opción seleccionada */
+    color: #1f1f1f; /* Color del texto de la opción seleccionada */
+  }
+
+
+nav{
+    background-color: #000000;
+    height: 80px;
+    width: 100%;
+
+}
+.enlace{
+    position: absolute;
+    padding:9px 15px;
+}
+.logo{
+    height: 60px;
+    border-radius: 40px;
+}
+nav ul{
+    float: right;
+    margin-right: 50px;
+}
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+nav ul li a{
+    color: #fff;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    
+}
+li a.active, li a:hover{
+    background: #1C9AEA;
+    transition: .5s;
+}
+.checkbtn{
+    font-size: 30px;
+    color: #fff;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+.closebtn{
+    font-size: 30px;
+    color: #fff;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+#check{
+    display: none;
+}
+.shopping-car{
+    font-size: 25px;
+    cursor: pointer;
+    padding: 15px;
+}
+.shopping-car:hover{
+    color: #980e85;
+}
+.shopping-car1{
+    font-size: 25px;
+    cursor: pointer;
+    padding: 15px;
+}
+.shopping-car1:hover{
+    color: #980e85;
+}
+.contador{
+    color: rgb(239, 239, 0);
+}
+
+@media (max-width: 952px){
+    .enlace{
+        padding-left: 20px;
+    }
+    nav ul li a{
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 858px){
+    .checkbtn{
+        display: block;
+    }
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+       background-color: #000000;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+    nav ul li a{
+        font-size: 20px;
+    }
+    li a:hover, li a.active{
+        background: none;
+        color: red;
+    }
+
+    #check:checked + .checkbtn {
+        display: none;
+      }
+    #check:checked + .checkbtn ~ ul {
+        left: 0;
+    }
+    #check:checked + .checkbtn ~ .closebtn {
+        display: block;
+    }
+
+
+    select {
+        width: 70%;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 12px;
+        
+      }
+      
+      /* Estilo cuando el select está desplegado */
+      
+      /* Estilo de las opciones */
+      option {
+        padding: 10px;
+        max-width: 10px;
+      }
+      
+      /* Estilo de la opción seleccionada */
+      option:checked {
+        background-color: #0366d6; /* Color de fondo de la opción seleccionada */
+        color: #fff; /* Color del texto de la opción seleccionada */
+      }
+      .shopping-car1{
+        font-size: 25px;
+    }
+    .carrito{
+        padding: 22px;
+        text-align:right;
+    }
+      }
+
+      @media (min-width: 858px){
+        .shopping-car1{
+            display: none;
+        }
+     
+}

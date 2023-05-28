@@ -1,0 +1,24 @@
+<nav class="fixed-nav">
+  <input type="checkbox" id="check" [checked]="isMenuOpen" (click)="toggleMenu()">
+  <label for="check" class="checkbtn"><i class="fas fa-bars"></i></label>
+  <label for="check" class="closebtn" ><i class="fas fa-times"></i></label>
+  <a href="#" class="enlace">
+      <img src="../../../assets/LogoDani1.png" alt="" class="logo">
+  </a>
+  <ul [class.open]="isMenuOpen">
+      <li>
+        <select id="categories" [(ngModel)]="selectedCategory" (change)="navigateToCategory()">
+          <option value="">Seleccione una categoría</option>
+          <option  class="opt" value="bolsos" >Bolsos</option>
+          <option class="opt" value="ropa">Ropa</option>
+          <option class="opt" value="tennis">Tennis</option>
+        </select></li>
+      <li><a href="#" (click)="closeMenu()">Inicio</a></li>
+      <li><a href="#" (click)="closeMenu()">Nosotros</a></li>
+      <li><a href="#" (click)="closeMenu()">Contacto</a></li>
+      <label class="shopping-car" (click)="redirigirACarrito()"><i class="fas fa-shopping-cart"></i></label>
+      <span class="contador">{{ cantidadProductos | async }}</span>
+  </ul>
+  <div class="carrito"><label class="shopping-car1"><i class="fas fa-shopping-cart" (click)="redirigirACarrito()"></i></label></div>
+  
+</nav>

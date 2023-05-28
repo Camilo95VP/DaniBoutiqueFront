@@ -1,0 +1,38 @@
+<app-navBar></app-navBar>
+<div class="productos-container">
+  <div class="descrip">
+    <h1>¡Puedes encargar tu pedido sin necesidad de pagar!</h1>
+    <p>Encarga tu pedido y paga cuando llegue, solo debes agregar uno o varios bolsos al carrito y cuando tengas listo el pedido dale 
+      <br> clic a "enviar pedido por whatsApp" y el pedido se genera por ti automaticamente, sin necesidad de haber pagado.</p>
+  </div>
+
+  <div class="cont-bolsos">
+    
+    <div class="bolsos" *ngFor="let producto of productos">
+      <h4 class="titulo-referencia" >{{ producto.nombre }}</h4>
+      <img class="imagen-producto" [src]="producto.imagen" alt="{{ producto.nombre }}"
+        (click)="mostrarImagenGrandee(producto.imagen)" />
+        <p class="precio">{{ producto.precio }}</p>
+      <button (click)="agregarAlCarrito(producto)">
+        Agregar al carrito
+        </button>
+    </div>
+  </div>
+
+  <div class="imagen-grande-overlay" *ngIf="mostrarImagenGrande">
+    <div class="imagen-grande">
+      <img class="imagen-modal" [src]="imagenGrandeUrl" alt="Imagen grande" (click)="cerrarModal()" />
+      <div class="especif">
+        <p>Largo: 20 cm</p>
+        <p>Ancho: 9 cm</p>
+      </div>
+      <div class="cont-colore-prcpal">
+        <div class="tex-dis">
+          <p>Colores disponibles:</p>
+        </div>
+      </div>
+      <button class="btn-cerrar-mod" (click)="cerrarModal()">Cerrar</button>
+   
+</div>
+</div>
+</div>

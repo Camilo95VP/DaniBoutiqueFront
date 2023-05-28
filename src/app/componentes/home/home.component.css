@@ -1,0 +1,19 @@
+.container{
+    width: 60%;
+    margin-left: 100px;
+    margin-top: 200px;
+}
+
+@media only screen and (max-width: 510px) {
+  .container{
+    width: 98%;
+    margin: 0;
+  }
+  .container h1{
+    font-size: 25px;
+  }
+  .cont-text{
+    padding: 40px;
+    margin-top: 50px;
+}
+}
