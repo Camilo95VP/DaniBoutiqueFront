@@ -13,9 +13,7 @@
       <img class="imagen-producto" [src]="producto.imagen" alt="{{ producto.nombre }}"
         (click)="mostrarImagenGrandee(producto.imagen)" />
         <p class="precio">{{ producto.precio }}</p>
-      <button (click)="agregarAlCarrito(producto)">
-        Agregar al carrito
-        </button>
+      <button (click)="agregarAlCarrito(producto)">Agregar al carrito </button>
     </div>
   </div>
 
@@ -23,13 +21,7 @@
     <div class="imagen-grande">
       <img class="imagen-modal" [src]="imagenGrandeUrl" alt="Imagen grande" (click)="cerrarModal()" />
       <div class="especif">
-        <p>Largo: 20 cm</p>
-        <p>Ancho: 9 cm</p>
-      </div>
-      <div class="cont-colore-prcpal">
-        <div class="tex-dis">
-          <p>Colores disponibles:</p>
-        </div>
+        <p>REPITE CONMIGO <br> ¡MEREZCO UN BOLSO NUEVO!</p>
       </div>
       <button class="btn-cerrar-mod" (click)="cerrarModal()">Cerrar</button>
    

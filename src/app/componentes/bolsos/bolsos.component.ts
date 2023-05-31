@@ -52,13 +52,12 @@ export class BolsosComponent implements OnInit {
   }
   
   agregarAlCarrito(producto: any) {
-    if (producto.color && producto.color.length > 0) {
-      
+    if (producto.color && producto.color.length > 1) {
       Swal.fire({
         title: 'Colores disponibles',
         text: 'Escoge el color que deseas:',
-        confirmButtonColor: "green",
-        background: "#dadadaeb",
+        confirmButtonColor: 'green',
+        background: '#dadadaeb',
         color: 'black',
         input: 'select',
         inputOptions: this.generarOpcionesColores(producto.color),
@@ -66,13 +65,7 @@ export class BolsosComponent implements OnInit {
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Agregar al carrito',
         inputValidator: (value) => {
-          return new Promise<string | null>((resolve) => {
-            if (!value) {
-              resolve('Debes seleccionar un color');
-            } else {
-              resolve(null);
-            }
-          });
+          return this.validarColorSeleccionado(value);
         }
       }).then((result) => {
         if (result.isConfirmed) {
@@ -80,13 +73,8 @@ export class BolsosComponent implements OnInit {
           this.carritoService.agregarProducto({ ...producto, color: colorSeleccionado });
           this.mostrarCarritoModal = true;
           this.router.navigate(['carrito']);
-          console.log(result)
         }
       });
-      
-      
-      
-      
     } else {
       this.carritoService.agregarProducto(producto);
       this.mostrarCarritoModal = true;
