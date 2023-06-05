@@ -19,8 +19,10 @@ export class BolsosComponent implements OnInit {
   imagenGrandeUrl: string = '';
   imagenSeleccionada: any = null;
   colorSeleccionado: string | null = null;
-
+  filtroReferencia: string = '';
+  filtroColor: string = '';
   productos: Producto[] = PRODUCTOS;
+  noResults: boolean = false;
 
   mostrarImagenGrandee(url: string) {
     this.imagenGrandeUrl = url;
@@ -40,18 +42,25 @@ export class BolsosComponent implements OnInit {
 
   generarOpcionesColores(colores: string[]): { [key: string]: string } {
     const opciones: { [key: string]: string } = {};
-  
+
     // Recorrer el array de colores y agregar solo los colores no duplicados
     for (const color of colores) {
       if (!opciones[color]) {
         opciones[color] = color;
       }
     }
-  
+
     return opciones;
   }
-  
+
   agregarAlCarrito(producto: any) {
+    Swal.fire({
+      title: 'Producto agregado con éxito al carrito',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 2500
+    });
+    let colorSeleccionado: string | null = null;
     if (producto.color && producto.color.length > 1) {
       Swal.fire({
         title: 'Colores disponibles',
@@ -63,7 +72,7 @@ export class BolsosComponent implements OnInit {
         inputOptions: this.generarOpcionesColores(producto.color),
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
-        confirmButtonText: 'Agregar al carrito',
+        confirmButtonText: 'Ok',
         inputValidator: (value) => {
           return this.validarColorSeleccionado(value);
         }
@@ -73,6 +82,14 @@ export class BolsosComponent implements OnInit {
           this.carritoService.agregarProducto({ ...producto, color: colorSeleccionado });
           this.mostrarCarritoModal = true;
           this.router.navigate(['carrito']);
+          if (colorSeleccionado.length>=0) {
+            Swal.fire({
+              title: 'Producto agregado con éxito al carrito',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 2500
+            });
+          }
         }
       });
     } else {
@@ -80,18 +97,34 @@ export class BolsosComponent implements OnInit {
       this.mostrarCarritoModal = true;
       this.router.navigate(['carrito']);
     }
+
+  }
+
+
+
+  validarColorSeleccionado(value: string): Promise<string | null> {
+    return new Promise<string | null>((resolve) => {
+      if (!value) {
+        resolve('Debes seleccionar un color');
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
+  cumpleCriterios(producto: Producto): boolean {
+    const referencia = this.filtroReferencia.toLowerCase().trim();
+    const color = this.filtroColor.toLowerCase().trim();
+  
+    if (referencia.length >= 2 && !producto.nombre.toLowerCase().includes(referencia)) {
+      return false;
+    }
+  
+    if (color.length >= 2 && !producto.color.some(c => c.toLowerCase().includes(color))) {
+      return false;
+    }
+  
+    return true;
   }
   
-  
-
-validarColorSeleccionado(value: string): Promise<string | null> {
-  return new Promise<string | null>((resolve) => {
-    if (!value) {
-      resolve('Debes seleccionar un color');
-    } else {
-      resolve(null);
-    }
-  });
-}
-
 }

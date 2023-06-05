@@ -2,19 +2,49 @@
 <div class="productos-container">
   <div class="descrip">
     <h1>¡Puedes encargar tu pedido sin necesidad de pagar!</h1>
-    <p>Encarga tu pedido y paga cuando llegue, solo debes agregar uno o varios bolsos al carrito y cuando tengas listo el pedido dale 
-      <br> clic a "enviar pedido por whatsApp" y el pedido se genera por ti automaticamente, sin necesidad de haber pagado.</p>
+    <p>Encarga tu pedido y paga cuando llegue, solo debes agregar uno o varios bolsos al carrito y cuando tengas listo
+      el pedido dale
+      <br> clic a "enviar pedido por whatsApp" y el pedido se genera por ti automaticamente, sin necesidad de haber
+      pagado.
+    </p>
   </div>
 
-  <div class="cont-bolsos">
-    
-    <div class="bolsos" *ngFor="let producto of productos">
-      <h4 class="titulo-referencia" >{{ producto.nombre }}</h4>
-      <img class="imagen-producto" [src]="producto.imagen" alt="{{ producto.nombre }}"
-        (click)="mostrarImagenGrandee(producto.imagen)" />
-        <p class="precio">{{ producto.precio }}</p>
-      <button (click)="agregarAlCarrito(producto)">Agregar al carrito </button>
+  <div class="cont-search1">
+    <div class="cont-search2">
+      <h6>"Descubre la elegancia en cada detalle con nuestros exclusivos productos. 
+        <br>
+        ¡Sé el centro de atención con estilo y sofisticación!</h6> 
     </div>
+
+    <div class="cont-search3">
+      <div class="form__group field">
+        <input type="input" class="form__field" placeholder="Buscar por color" required="" [(ngModel)]="filtroColor">
+        <label for="name" class="form__label"><i _ngcontent-rty-c2="" class="fas fa-search" id="icon-search"></i>
+          Color</label>
+      </div>
+
+      <div class="form__group field">
+        <input type="input" class="form__field" placeholder="Buscar por referencia" required=""
+          [(ngModel)]="filtroReferencia">
+        <label for="name" class="form__label"><i _ngcontent-rty-c2="" class="fas fa-search" id="icon-search"></i>
+          Referencia</label>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="cont-bolsos">
+    <ng-container class="bolsos" *ngFor="let producto of productos">
+      <div *ngIf="cumpleCriterios(producto)">
+        <h4 class="titulo-referencia">{{ producto.nombre }}</h4>
+        <img class="imagen-producto" [src]="producto.imagen" alt="{{ producto.nombre }}"
+          (click)="mostrarImagenGrandee(producto.imagen)" />
+        <p class="precio">{{ producto.precio }}</p>
+        <button (click)="agregarAlCarrito(producto)">Agregar al carrito<i _ngcontent-rty-c2="" class="fas fa-shopping-cart" id="icon-car"></i> </button>
+      </div>
+    </ng-container>
+    
   </div>
 
   <div class="imagen-grande-overlay" *ngIf="mostrarImagenGrande">
@@ -24,7 +54,10 @@
         <p>REPITE CONMIGO <br> ¡MEREZCO UN BOLSO NUEVO!</p>
       </div>
       <button class="btn-cerrar-mod" (click)="cerrarModal()">Cerrar</button>
-   
-</div>
-</div>
+
+    </div>
+  </div>
+  <a href="https://api.whatsapp.com/send?phone=573145570996&text=Hola%20Daniela,%20estuve%20navegando%20en%20tu%20pagina,%20deseo%20más%20información%20sobre%20los%20bolsos,%20gracias." class="whatsapp-float">
+    <img class="whatsapp-img" src="../../../assets/wpp-removebg-preview.png" alt="WhatsApp" width="30px" height="30px">
+  </a>
 </div>
