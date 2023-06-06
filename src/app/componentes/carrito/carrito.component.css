@@ -3,6 +3,11 @@
     text-align: center;
     margin-top: 250px;
 }
+.swal2-confirm--red {
+    background: red !important;
+    /* Otros estilos personalizados */
+  }
+  
 .text-car{
     font-size: 22px;
 }

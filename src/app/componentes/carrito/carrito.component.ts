@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../servicios/carrito_service/carrito.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-carrito',
@@ -45,33 +47,86 @@ imagen: any;
   
 
   enviarPedido() {
-    const pedido = {
-      productos: this.carrito,
-      total: this.calcularTotal()
-    }
     this.detallesProductos = this.carrito.map((producto) => {
-      return `Bolso: ${producto.nombre}, Cantidad: ${producto.cantidad}, Color: ${producto.color}, Precio: ${producto.precio}`;
-    }).join('\n');
-    console.log(this.detallesProductos)
-    this.mensaje = `¡Hola! Quiero realizar el siguiente pedido:\n\n${this.detallesProductos}\n\nTotal: ${this.calcularTotal()}\n\n Muchas gracias !`;
-    const numeroTelefono = '3145570996';
-    const enlaceWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(String(this.mensaje))}`;
-    window.open(enlaceWhatsApp, '_blank');
-    this.carritoService.vaciarCarrito();
-    console.log(this.mensaje)
+      return `Bolso: ${producto.nombre}, Cantidad: ${producto.cantidad}, Color: ${producto.color}, Precio: ${producto.precio}\n`;
+    }).join('');
+  
+    const detallesHTML = this.carrito.map((producto) => {
+      return `
+        <li>
+          <img src="${producto.imagen}" alt="${producto.nombre}" width="100" height="100">
+          Bolso: ${producto.nombre}, Cantidad: ${producto.cantidad}, Color: ${producto.color}, Precio: ${producto.precio}
+        </li>
+      `;
+    }).join('');
+  
+    Swal.fire({
+      title: 'Confirmar pedido',
+      html: `
+        <div>
+          <p>Por favor, revisa los detalles del pedido:</p>
+          <p><strong>Productos:</strong></p>
+          <ul>
+            ${detallesHTML}
+          </ul>
+          <p><strong>Total:</strong> ${this.calcularTotal()}</p>
+        </div>`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      customClass: {
+        confirmButton: 'swal2-confirm',
+        cancelButton: 'swal2-cancel'
+      },
+      background: '#ffffff'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const mensaje = `¡Hola! Quiero realizar el siguiente pedido:\n\n${this.detallesProductos}\n\nTotal: ${this.calcularTotal()}\n\n¡Muchas gracias!`;
+        const numeroTelefono = '3145570996';
+        const enlaceWhatsApp = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(String(mensaje))}`;
+        window.open(enlaceWhatsApp, '_blank');
+        this.carritoService.vaciarCarrito();
+        Swal.fire('Pedido enviado', 'El pedido se ha enviado correctamente, pronto te contactaremos por WhatsApp', 'success');
+      }
+    });
   }
 
 
   vaciarCarrito() {
-    this.carritoService.vaciarCarrito();
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción vaciará el carrito. ¿Deseas continuar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Vaciar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.carritoService.vaciarCarrito();
+        Swal.fire('Carrito vaciado', 'El carrito se ha vaciado correctamente', 'success');
+      }
+    });
   }
 
   eliminarProducto(producto: any) {
-    const index = this.carrito.indexOf(producto);
-    if (index !== -1) {
-      this.carrito.splice(index, 1);
-      this.carritoService.actualizarCarrito(this.carrito);
-    }
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará el producto del carrito. ¿Deseas continuar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const index = this.carrito.indexOf(producto);
+        if (index !== -1) {
+          this.carrito.splice(index, 1);
+          this.carritoService.actualizarCarrito(this.carrito);
+        }
+        Swal.fire('Producto eliminado', 'El producto se ha eliminado del carrito correctamente', 'success');
+      }
+    });
   }
   
 
