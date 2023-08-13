@@ -14,6 +14,8 @@ import { Producto } from '../bolsos/producto.interface';
 })
 export class BolsosComponent implements OnInit {
 
+  isLoading: boolean = true;
+
   mostrarCarritoModal: boolean = false;
   mostrarImagenGrande: boolean = false;
   imagenGrandeUrl: string = '';
@@ -25,6 +27,7 @@ export class BolsosComponent implements OnInit {
   noResults: boolean = false;
 
   mostrarImagenGrandee(url: string) {
+     // Simula un retraso para mostrar el spinner de carga
     this.imagenGrandeUrl = url;
     this.mostrarImagenGrande = true;
   }
@@ -38,6 +41,9 @@ export class BolsosComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false; // Indica que el contenido ha terminado de cargar
+    }, 2000); // Cambia esto al tiempo que consideres adecuado
   }
 
   generarOpcionesColores(colores: string[]): { [key: string]: string } {

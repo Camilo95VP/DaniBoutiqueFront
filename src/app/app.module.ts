@@ -10,6 +10,7 @@ import { NavBarComponent } from './componentes/navBar/navBar.component';
 import { BolsosComponent } from './componentes/bolsos/bolsos.component';
 import { TennisComponent } from './componentes/tennis/tennis.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
+import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-spinner.component';
 
 import { async } from 'rxjs';
 
@@ -21,6 +22,7 @@ import { async } from 'rxjs';
     BolsosComponent,
     TennisComponent,
     CarritoComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

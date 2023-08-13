@@ -44,25 +44,20 @@
     gap: 14px;
 }
 #wpp{
-    background-color: rgba(0, 128, 0, 0.896);
+    background-color: rgba(0, 128, 0, 0.662);
 }
 #vaciar{
-    background-color: rgba(139, 0, 0, 0.866);
+    background-color: rgba(93, 0, 0, 0.536);
 }
 #seguir{
-    background-color: rgba(0, 86, 139, 0.862);
+    background-color: rgba(0, 52, 84, 0.597);
 }
-#cantidad{
-    color: darksalmon;
-}
+
 #cant-span{
-    color: rgb(228, 228, 0);
+    color: cadetblue;
 }
 #col-span{
-    color: rgb(228, 228, 0);
-}
-#color{
-    color: darksalmon;
+    color: cadetblue;
 }
 button {
     position: relative;
@@ -78,10 +73,11 @@ button {
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
+    background-color: cadetblue;
    }
    
    button:hover {
-    box-shadow: 0 0 5px #d0d0d0, 0 0 10px #000841da, 0 0 20px #979797;
+    box-shadow: 0 0 5px #e3e3e3, 0 0 10px #000841da, 0 0 20px #e8e8e8;
     transition-delay: 0.1s;
    }
    

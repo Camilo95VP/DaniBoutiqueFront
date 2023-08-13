@@ -1,4 +1,17 @@
 <app-navBar></app-navBar>
+
+<ng-template #loadingTemplate>
+  <div class="loading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</ng-template>
+
+<div *ngIf="isLoading; else content">
+  <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container>
+</div>
+
+
+<ng-template #content>
 <div class="productos-container">
   <div class="descrip">
     <h1>¡Puedes encargar tu pedido sin necesidad de pagar!</h1>
@@ -61,3 +74,4 @@
     <img class="whatsapp-img" src="../../../assets/wpp-removebg-preview.png" alt="WhatsApp" width="30px" height="30px">
   </a>
 </div>
+</ng-template>

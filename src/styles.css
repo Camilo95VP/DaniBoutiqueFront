@@ -1,13 +1,14 @@
-
+/*  */
 
 body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     /* background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(76,9,121,1) 35%, rgba(0,212,255,1) 100%); */
 
-background: rgb(2,0,36);
-background: linear-gradient(90deg, rgb(0, 0, 8) 0%, rgba(164, 0, 118, 0.99) 100%, rgba(110,28,32,1) 100%, rgb(0, 128, 153) 100%);
+/* background: rgb(198, 3, 175); 
+background: linear-gradient(90deg, rgba(158, 64, 142, 0.538) 0%, rgba(234, 90, 193, 0.653) 100%, rgba(168, 6, 174, 0.653) 100%, rgb(0, 128, 153) 100%); */
 
+background-color: rgb(160, 103, 154);
 
 /* background: rgb(2,0,36);
 background: linear-gradient(90deg, rgba(2,0,36,1) 90%, rgba(2,0,36,1) 100%, rgba(0,212,255,1) 100%, rgba(251,251,251,1) 100%); */
