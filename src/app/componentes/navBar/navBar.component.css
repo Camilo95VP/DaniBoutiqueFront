@@ -89,6 +89,12 @@ li a.active, li a:hover{
     background: #1C9AEA;
     transition: .5s;
 }
+.admin{
+    cursor: pointer;
+}
+.admin:hover{
+    background-color:#850589 !important
+}
 .checkbtn{
     font-size: 30px;
     color: #fff;

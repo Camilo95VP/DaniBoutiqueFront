@@ -50,4 +50,8 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/carrito']); 
   }
 
+  redirigirAdmin(){
+    this.router.navigate(['/admin']);
+  }
+
 }

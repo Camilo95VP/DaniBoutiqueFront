@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,9 @@ import { TennisComponent } from './componentes/tennis/tennis.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 import { LoadingSpinnerComponent } from './componentes/loading-spinner/loading-spinner.component';
 
-import { async } from 'rxjs';
+
+import { AdminComponent } from './componentes/admin/admin.component';
+import { LoadingSpinner2Component } from './componentes/loading-spinner2/loading-spinner2.component';
 
 @NgModule({
   declarations: [
@@ -22,12 +25,15 @@ import { async } from 'rxjs';
     BolsosComponent,
     TennisComponent,
     CarritoComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AdminComponent,
+    LoadingSpinner2Component
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [Router],
   bootstrap: [AppComponent]

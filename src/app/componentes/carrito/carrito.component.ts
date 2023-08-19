@@ -15,8 +15,10 @@ export class CarritoComponent implements OnInit {
 imagen: any;
     nombre: any;
     cantidad: any;
-    precio: any; producto: any, color: string 
-}[] = [];
+    precio: any; 
+    producto: any, 
+    color: string 
+} [] = [];
   mostrarCarritoModal: boolean = false;
   detallesProductos: String | undefined
   mensaje: String = ''
