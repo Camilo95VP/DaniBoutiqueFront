@@ -38,13 +38,15 @@ imagen: any;
 
   calcularTotal(): number {
     let total = 0;
-    for (const producto of this.carrito) {
-      const precio = parseFloat(producto.precio.replace("$ ", "").replace(".", "").replace(",", "."));
+  for (const producto of this.carrito) {
+    const precioNumerico = parseFloat(producto.precio.replace(/[^0-9.]/g, ''));
+    if (!isNaN(precioNumerico)) {
       const cantidad = producto.cantidad;
-      const subtotal = precio * cantidad;
+      const subtotal = precioNumerico * cantidad;
       total += subtotal;
     }
-    return total;
+  }
+  return total;
   }
   
 

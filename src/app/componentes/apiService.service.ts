@@ -29,4 +29,11 @@ export class ApiServiceService {
     return this.http.post(`${this.apiUrl}`, producto);
   }
 
+  cargarImagen(imagen: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('imagen', imagen); // 'imagen' debe coincidir con el nombre del campo en tu servidor
+
+    return this.http.post(`${this.apiUrl}/upload`, formData);
+  }
+
 }

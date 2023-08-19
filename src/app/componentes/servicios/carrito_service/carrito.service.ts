@@ -16,7 +16,7 @@ obtenerCarrito(): Observable<any[]> {
 }
 
 agregarProducto(producto: any, cantidad: number = 1) {
-  const productoExistente = this.carrito.find(item => item.id === producto.id);
+  const productoExistente = this.carrito.find(item => item.id === producto.id && item.color === producto.color);
 
   if (productoExistente) {
     productoExistente.cantidad += cantidad;
@@ -25,7 +25,7 @@ agregarProducto(producto: any, cantidad: number = 1) {
     this.carrito.push(producto);
   }
 
-  this.carritoSubject.next(this.carrito);
+  this.carritoSubject.next([...this.carrito]);
 }
 
 vaciarCarrito() {

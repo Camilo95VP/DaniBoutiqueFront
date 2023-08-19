@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiServiceService } from '../apiService.service';
 import Swal from 'sweetalert2';
+import { Producto } from '../bolsos/producto.interface';
 
 
 
@@ -17,13 +18,13 @@ export class AdminComponent implements OnInit {
   isLoading: boolean = true;
   productoEnEdicion: any = null;
   productoEnEdicionId: string | null = null;
-
+  filtroReferencia: string = '';
 
   nuevoProducto: any = {
     nombre: '',
     precio: '',
     color: '',
-    imagen: '',
+    imagen: null // Cambiar a null para permitir la carga de imágenes
   };
 
   mostrarFormularioAgregarFlag: boolean = false;
@@ -82,8 +83,6 @@ export class AdminComponent implements OnInit {
     this.loginError = false; // También reiniciar el estado de error al cerrar sesión
     this.username = '';
     this.password = '';
-  }
-  redirectLogout(){
     this.router.navigate(['/'])
   }
 
@@ -139,13 +138,22 @@ export class AdminComponent implements OnInit {
   };
   
   crearProducto() {
-    this.apiService.crearProducto(this.nuevoProducto)
+    // Divide el campo color en un array de strings
+  this.nuevoProducto.color = this.nuevoProducto.color.split(',');
+  
+  this.apiService.crearProducto(this.nuevoProducto)
       .subscribe(
         (productoCreado) => {
           console.log('Producto creado:', productoCreado);
           Swal.fire('¡Producto creado!', 'El producto se ha creado exitosamente.', 'success');
           this.obtenerProductos(); // Actualizar la lista de productos
           this.mostrarFormularioAgregarFlag = false; // Ocultar el formulario
+          this.nuevoProducto = { // Restaurar el objeto nuevoProducto
+            nombre: '',
+            precio: '',
+            color: '',
+            imagen: null
+          };
         },
         (error) => {
           console.error('Error al crear el producto:', error);
@@ -172,6 +180,10 @@ export class AdminComponent implements OnInit {
     }
     this.productoEnEdicionId = null;
   }
+  onFileChange(event: any) {
+    const file = event.target.files[0]; // Obtener el archivo seleccionado
+    this.nuevoProducto.imagen = file; // Asignar el archivo al campo de imagen
+  }
   
   // ... 
     
@@ -179,6 +191,18 @@ export class AdminComponent implements OnInit {
   cancelarEdicion() {
     // Limpiar la edición
     this.productoEnEdicionId = null;
+  }
+
+  cumpleCriterios(producto: Producto): boolean {
+    const referencia = this.filtroReferencia.toLowerCase().trim();
+  
+  
+    if (referencia.length >= 2 && !producto.nombre.toLowerCase().includes(referencia)) {
+      return false;
+    }
+  
+  
+    return true;
   }
 
 

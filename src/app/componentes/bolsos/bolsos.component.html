@@ -53,7 +53,7 @@
         <h4 class="titulo-referencia">{{ producto.nombre }}</h4>
         <img class="imagen-producto" [src]="producto.imagen" alt="{{ producto.nombre }}"
           (click)="mostrarImagenGrandee(producto.imagen)" />
-        <p class="precio">{{ producto.precio }}</p>
+        <p class="precio">$ {{ producto.precio }}</p>
         <button (click)="agregarAlCarrito(producto)">Agregar al carrito<i _ngcontent-rty-c2="" class="fas fa-shopping-cart" id="icon-car"></i> </button>
       </div>
     </ng-container>

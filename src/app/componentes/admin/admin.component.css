@@ -16,6 +16,9 @@
     margin: auto;
     margin-top: 40px
   }
+  .img img{
+    max-width: 130px;
+  }
   .alert{
     background-color: #ffd5d5;
     width: 30%;
@@ -34,15 +37,6 @@
     outline: none;
     color: #ffffff;
     cursor: pointer;
-  }
-  @media(max-width:600px) {
-    .form_container{
-        margin-top: 15px;
-        width: 70%;
-    }
-    .alert{
-        width: 90%;
-      }
   }
   
   .logo_container {
@@ -109,7 +103,7 @@
     outline: none;
     border: 1px solid #e5e5e5;
     filter: drop-shadow(0px 1px 0px #efefef)
-      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
   }
   
@@ -143,7 +137,7 @@
     color: #242424;
     border: 1px solid #e5e5e5;
     filter: drop-shadow(0px 1px 0px #efefef)
-      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     cursor: pointer;
   }
   
@@ -160,7 +154,7 @@
     color: #ffffff;
     border: 1px solid #e5e5e5;
     filter: drop-shadow(0px 1px 0px #efefef)
-      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     cursor: pointer;
   }
   
@@ -194,4 +188,21 @@
     margin: auto;
     gap: 35px;
   }
- 
+  
+  @media(max-width:600px) {
+    .form_container{
+        margin-top: 15px;
+        width: 70%;
+    }
+    .alert{
+        width: 90%;
+      }
+      .cont-fat{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        padding: 20px;
+        width: 90%;
+        margin: auto;
+        gap: 35px;
+    }
+  }

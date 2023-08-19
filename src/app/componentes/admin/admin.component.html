@@ -1,4 +1,4 @@
-<!-- <div *ngIf="!isLoggedIn; else adminPanel">
+<div *ngIf="!isLoggedIn; else adminPanel">
 
   <form class="form_container">
     <a href="#" class="enlace">
@@ -39,7 +39,7 @@
     <button (click)="login()" title="Sign In" type="submit" class="sign-in_btn">
       <span>Ingresar</span>
     </button>
-    <button (click)="redirectLogout()" title="Sign In" type="submit" class="log-out_btn">
+    <button (click)="logout()" title="Sign In" type="submit" class="log-out_btn">
       <span>Volver a la tienda</span>
     </button>
 
@@ -47,84 +47,90 @@
   <div *ngIf="loginError" class="alert">
     <p style="color: red;">Usuario o contraseña incorrectos</p>
   </div>
-</div> -->
+</div>
 
 
-<!-- <ng-template #adminPanel>
+<ng-template #adminPanel>
   <ng-container *ngIf="isLoading; else adminContent">
     <app-loading-spinner2></app-loading-spinner2>
     <div class="spinner"></div>
-  </ng-container> -->
+  </ng-container>
 
-  <!-- <ng-template #adminContent> -->
+  <ng-template #adminContent>
     <h2>Panel Administrador</h2>
-  <button (click)="logout()">Cerrar Sesión</button>
-  <button (click)="mostrarFormularioAgregar()">Agregar Nuevo Producto</button> <!-- Agregar botón para agregar -->
-
-
-
-  <div *ngIf="mostrarFormularioAgregarFlag">
-    <h4>Agregar Nuevo Producto</h4>
-    <form (submit)="crearProducto()">
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre">
-  
-      <label for="precio">Precio:</label>
-      <input type="text" id="precio" [(ngModel)]="nuevoProducto.precio" name="precio">
-  
-      <label for="color">Color:</label>
-      <input type="text" id="color" [(ngModel)]="nuevoProducto.color" name="color">
-
-      <label for="color">Imagen:</label>
-      <input type="text" id="color" [(ngModel)]="nuevoProducto.imagen" name="color">
-  
-      <button type="submit">Guardar</button>
-    </form>
-  </div>
-
-
-
-
-
-
-  <h3>Lista de Productos</h3>
-  <div class="cont-fat">
-    <div class="cont" *ngFor="let producto of productos">
-      <div class="text">
-        <p>Referencia: {{ producto.nombre }}</p>
-        <p>Precio: {{ producto.precio }}</p>
-        <p>Colores: {{ producto.color }}</p>
-      </div>
-      <div class="img">
-        <img src="{{ producto.imagen }}" alt="" style="max-width: 200px">
-      </div>
-      <div class="actions">
-        <button (click)="editarProducto(producto)">Editar</button> <!-- Botón para editar -->
-        <button (click)="eliminarProducto(producto._id)">Eliminar</button> <!-- Botón para eliminar -->
-      </div>
-      <div *ngIf="productoEnEdicionId === producto._id">
-        <h4>Editar Producto</h4>
-        <form (submit)="guardarEdicion()">
-          <!-- Aquí colocas los campos de edición -->
-          <label for="nombre">Nombre:</label>
-          <input type="text" id="nombre" [(ngModel)]="productoEnEdicion.nombre" name="nombre">
-      
-          <label for="precio">Precio:</label>
-          <input type="text" id="precio" [(ngModel)]="productoEnEdicion.precio" name="precio">
-      
-          <label for="color">Color:</label>
-          <input type="text" id="color" [(ngModel)]="productoEnEdicion.color" name="color">
-
-          <label for="color">Imagen:</label>
-          <input type="text" id="color" [(ngModel)]="productoEnEdicion.imagen" name="color">
-      
-          <button type="submit">Guardar Cambios</button>
-          <button type="button" (click)="cancelarEdicion()">Cancelar</button>
-        </form>
-      </div>
-      
-    </div>
+    <button (click)="logout()">Cerrar Sesión</button>
+    <button (click)="mostrarFormularioAgregar()">Agregar Nuevo Producto</button>
+    <div class="form__group field">
+      <input type="input" class="form__field" placeholder="Buscar por referencia" required=""
+        [(ngModel)]="filtroReferencia">
+      <label for="name" class="form__label"><i _ngcontent-rty-c2="" class="fas fa-search" id="icon-search"></i>
+        Referencia</label>
     </div>
 
-  <!-- </ng-template> -->
-<!-- </ng-template> -->
+
+    <div *ngIf="mostrarFormularioAgregarFlag">
+      <h4>Agregar Nuevo Producto</h4>
+      <form (submit)="crearProducto()">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="nuevoProducto.nombre" name="nombre">
+
+        <label for="precio">Precio:</label>
+        <input type="text" id="precio" [(ngModel)]="nuevoProducto.precio" name="precio">
+
+        <label for="color">Color:</label>
+        <input type="text" id="color" [(ngModel)]="nuevoProducto.color" name="color">
+
+        <label for="imagen">Imagen:</label>
+        <input type="text" id="color" [(ngModel)]="nuevoProducto.imagen" name="imagen">
+
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
+
+
+
+    <h3>Lista de Productos</h3>
+    <div class="cont-fat">
+      <div class="cont" *ngFor="let producto of productos">
+        <div *ngIf="cumpleCriterios(producto)">
+          <div class="text">
+            <p>Referencia: {{ producto.nombre }}</p>
+            <p>Precio: {{ producto.precio }}</p>
+            <p>Colores: {{ producto.color }}</p>
+          </div>
+          <div class="img">
+            <img src="{{ producto.imagen }}" alt="">
+          </div>
+          <div class="actions">
+            <button (click)="editarProducto(producto)">Editar</button>
+            <button (click)="eliminarProducto(producto._id)">Eliminar</button>
+          </div>
+        </div>
+
+
+
+        <div *ngIf="productoEnEdicionId === producto._id">
+          <h4>Editar Producto</h4>
+          <form (submit)="guardarEdicion()">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" [(ngModel)]="productoEnEdicion.nombre" name="nombre">
+
+            <label for="precio">Precio:</label>
+            <input type="text" id="precio" [(ngModel)]="productoEnEdicion.precio" name="precio">
+
+            <label for="color">Color:</label>
+            <input type="text" id="color" [(ngModel)]="productoEnEdicion.color" name="color">
+
+            <label for="imagen">Imagen:</label>
+            <input type="text" id="imagen" [(ngModel)]="productoEnEdicion.imagen" name="imagen">
+            
+            <button type="submit">Guardar Cambios</button>
+            <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+</ng-template>
