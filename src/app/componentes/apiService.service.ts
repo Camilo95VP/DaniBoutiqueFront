@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiServiceService {
 
-  private apiUrl = 'http://localhost:4000/api/bolsos'; // Reemplaza con la URL de tu API
+  private apiUrl = 'https://daniback.onrender.com/api/bolsos'; // Reemplaza con la URL de tu API
 
   constructor(private http: HttpClient) {}
 
