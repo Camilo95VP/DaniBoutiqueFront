@@ -19,6 +19,7 @@ export class AdminComponent implements OnInit {
   productoEnEdicion: any = null;
   productoEnEdicionId: string | null = null;
   filtroReferencia: string = '';
+  mostrarSpinner: boolean = false;
 
   nuevoProducto: any = {
     nombre: '',
@@ -138,6 +139,7 @@ export class AdminComponent implements OnInit {
   };
   
   crearProducto() {
+    this.mostrarSpinner = true;
     // Divide el campo color en un array de strings
   this.nuevoProducto.color = this.nuevoProducto.color.split(',');
   
@@ -154,10 +156,13 @@ export class AdminComponent implements OnInit {
             color: '',
             imagen: null
           };
+          this.mostrarSpinner = false;
         },
+        
         (error) => {
           console.error('Error al crear el producto:', error);
           Swal.fire('Error', 'Hubo un error al crear el producto.', 'error');
+          this.mostrarSpinner = false;
         }
       );
   }
@@ -191,6 +196,10 @@ export class AdminComponent implements OnInit {
   cancelarEdicion() {
     // Limpiar la edición
     this.productoEnEdicionId = null;
+  }
+
+  cancelarAgregar(){
+    this.mostrarFormularioAgregarFlag = false;
   }
 
   cumpleCriterios(producto: Producto): boolean {
