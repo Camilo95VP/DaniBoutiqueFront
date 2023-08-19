@@ -10,7 +10,7 @@ export class ApiServiceService {
   // https://daniback.onrender.com
   // http://localhost:4000
 
-  private apiUrl = 'https://daniback.onrender.com'; // Reemplaza con la URL de tu API
+  private apiUrl = 'https://daniback.onrender.com/api/bolsos'; // Reemplaza con la URL de tu API
 
   constructor(private http: HttpClient) {}
 
