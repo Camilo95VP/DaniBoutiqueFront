@@ -11,7 +11,7 @@ import { Producto } from '../bolsos/producto.interface';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css', 'admin.component.style.css']
 })
 export class AdminComponent implements OnInit {
   productos: any[] = [];
