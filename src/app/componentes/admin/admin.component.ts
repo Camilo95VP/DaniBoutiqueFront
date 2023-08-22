@@ -65,7 +65,7 @@ export class AdminComponent implements OnInit {
 
       setTimeout(() => {
         this.isLoading = false; // Cambia el estado de carga a false después de un tiempo de espera (simulación)
-      }, 5000); // Simula 2 segundos de carga
+      }, 1000); // Simula 2 segundos de carga
     } else {
       this.isLoggedIn = false;
       this.loginError = true; // Usuario o contraseña incorrectos
@@ -76,7 +76,7 @@ export class AdminComponent implements OnInit {
   clearLoginError() {
     setTimeout(() => {
       this.loginError = false;
-    }, 2500); // 5000 milisegundos (5 segundos)
+    }, 1000); // 5000 milisegundos (5 segundos)
   }
 
   logout() {

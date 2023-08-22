@@ -1,15 +1,11 @@
 <app-navBar></app-navBar>
 
-<ng-template #loadingTemplate>
+<ng-container *ngIf="isLoadingbd; else content">
+  <!-- Spinner de carga -->
   <div class="loading">
     <app-loading-spinner></app-loading-spinner>
   </div>
-</ng-template>
-
-<div *ngIf="isLoading; else content">
-  <ng-container *ngTemplateOutlet="loadingTemplate"></ng-container>
-</div>
-
+</ng-container>
 
 <ng-template #content>
 <div class="productos-container">

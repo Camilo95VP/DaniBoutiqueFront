@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CarritoService } from '../servicios/carrito_service/carrito.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { PRODUCTOS } from '../bolsos/productos.data';
 import { Producto } from '../bolsos/producto.interface';
 import { ApiServiceService } from '../apiService.service';
 
@@ -16,6 +15,8 @@ import { ApiServiceService } from '../apiService.service';
 export class BolsosComponent implements OnInit {
 
   isLoading: boolean = true;
+  isLoadingbd: boolean = true;
+
 
   mostrarCarritoModal: boolean = false;
   mostrarImagenGrande: boolean = false;
@@ -24,7 +25,7 @@ export class BolsosComponent implements OnInit {
   colorSeleccionado: string | null = null;
   filtroReferencia: string = '';
   filtroColor: string = '';
-  productos: Producto[] = PRODUCTOS;
+  productos: Producto[] = [];
   noResults: boolean = false;
 
   mostrarImagenGrandee(url: string) {
@@ -50,7 +51,7 @@ export class BolsosComponent implements OnInit {
     // Obtener productos desde la base de datos usando el servicio
   this.apiService.getProducts().subscribe((productos) => {
     this.productos = productos;
-    console.log(productos);
+    this.isLoadingbd = false;
   });
   }
 
