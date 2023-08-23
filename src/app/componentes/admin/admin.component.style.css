@@ -122,7 +122,7 @@
   .cont-form-agregar {
     background-color: #0000005c;
     text-align: center;
-    width: 90%;
+    width: 26%;
     margin: auto;
     border-radius: 10px;
   }
@@ -130,11 +130,14 @@
     display: grid;
     gap: 10px;
     margin: auto;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
   @media(max-width:600px){
     .form1 {
       grid-template-columns: repeat(1, 1fr);
+  }
+  .cont-form-agregar{
+    width: 85%;
   }
   .img{
     text-align: center;
@@ -160,6 +163,12 @@
     color: white;
     height: 30px;
   }
+  #imagen{
+    background-color: rgba(0, 0, 0, 0.416);
+    padding: 12px;
+    color: ivory;
+    cursor: pointer;
+  }
   .int {
     padding: 5px;
     border-radius: 7px;
@@ -168,6 +177,12 @@
     padding: 40px;
     margin-top: 30px
   }
+  @media(max-width:600px){
+  .cont-form2{
+    padding: 12px;
+  }
+  }
+
   .editar-form {
     background-color: #0000005c;
     display: grid;
@@ -189,7 +204,7 @@
   .text{
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-  }
+    font-size: 10px;  }
   .text label{
     color: black;
     margin-top: 18px;
@@ -199,5 +214,5 @@
     color:white
   }
   .cont-info-bd{
-    display: flex;
+    display: grid;
   }

@@ -44,7 +44,7 @@
 
 
   <div class="cont-bolsos">
-    <ng-container class="bolsos" *ngFor="let producto of productos">
+    <ng-container class="bolsos" *ngFor="let producto of productosOrdenados">
       <div *ngIf="cumpleCriterios(producto)">
         <h4 class="titulo-referencia">{{ producto.nombre }}</h4>
         <img class="imagen-producto" [src]="producto.imagen" alt="{{ producto.nombre }}"

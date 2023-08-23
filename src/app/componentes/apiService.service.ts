@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +11,24 @@ export class ApiServiceService {
   // http://localhost:4000
 
   private apiUrl = 'https://daniback.onrender.com/api/bolsos'; // Reemplaza con la URL de tu API
+  private urlImagen = 'https://daniback.onrender.com'
 
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map((productos) => {
+        // Mapear la URL de la imagen para cada producto
+        return productos.map((producto) => {
+          return {
+            ...producto,
+            imagen: `${this.urlImagen}/uploads/${producto.imagen}` // Ruta relativa a las imágenes en el servidor
+          };
+        });
+      })
+    );
   }
+
 
   actualizarProducto(producto: any): Observable<any> {
     const url = `${this.apiUrl}/${producto._id}`;
@@ -32,11 +44,5 @@ export class ApiServiceService {
     return this.http.post(`${this.apiUrl}`, producto);
   }
 
-  cargarImagen(imagen: File): Observable<any> {
-    const formData = new FormData();
-    formData.append('imagen', imagen); // 'imagen' debe coincidir con el nombre del campo en tu servidor
-
-    return this.http.post(`${this.apiUrl}/upload`, formData);
-  }
 
 }

@@ -54,140 +54,142 @@
   <ng-container *ngIf="isLoading; else adminContent">
     <app-loading-spinner2></app-loading-spinner2>
     <div class="spinner"></div>
-  </ng-container> 
+  </ng-container>
 
-<ng-template #adminContent> 
-<div class="cont1">
-  <div class="title">
-    <h2>Panel Administrador</h2>
-    <div class="live"></div>
-    <div class="textlive">Live</div>
-  </div>
-  <div class="buttons">
-
-    <div class="buttonsChild">
-
-      <div class="input-container">
-        <input type="input" placeholder="Buscar por referencia" class="input-field" type="text" required=""
-          [(ngModel)]="filtroReferencia">
-        <label for="input-field" class="input-label">Enter text<i _ngcontent-rty-c2="" class="fas fa-search"
-            id="icon-search"></i></label>
-        <span class="input-highlight"></span>
+  <ng-template #adminContent>
+    <div class="cont1">
+      <div class="title">
+        <h2>Panel Administrador</h2>
+        <div class="live"></div>
+        <div class="textlive">Live</div>
       </div>
+      <div class="buttons">
 
-      <button class="btn" (click)="mostrarFormularioAgregar()" [disabled]="mostrarSpinner">Agregar bolso <i
-          _ngcontent-rty-c2="" class="fas fa-plus" id="icon-search"></i></button>
-      <button class="btn" id="close" (click)="logout()">Cerrar Sesión <i _ngcontent-rty-c2="" class="fas fa-power-off"
-          id="icon-search"></i></button>
-    </div>
-  </div>
-</div>
+        <div class="buttonsChild">
 
-<div class="cont-form-agregar" *ngIf="mostrarFormularioAgregarFlag">
+          <div class="input-container">
+            <input type="input" placeholder="Buscar por referencia" class="input-field" type="text" required=""
+              [(ngModel)]="filtroReferencia">
+            <label for="input-field" class="input-label">Enter text<i _ngcontent-rty-c2="" class="fas fa-search"
+                id="icon-search"></i></label>
+            <span class="input-highlight"></span>
+          </div>
 
-  <div class="cont-form2">
-
-    <form (submit)="crearProducto()">
-
-      <div class="form1">
-        <label for="nombre">Nombre:</label>
-        <input class="int" class="int" type="text" placeholder="Referencia" id="nombre" required
-          [(ngModel)]="nuevoProducto.nombre" name="nombre">
-
-        <label for="precio">Precio:</label>
-        <input class="int" type="text" placeholder="💲" id="precio" [(ngModel)]="nuevoProducto.precio" name="precio" required>
-
-        <label for="color">Color:</label>
-        <input class="int" type="text" placeholder="🔵🟡🟣🔴🟤⚪🟢" id="color" [(ngModel)]="nuevoProducto.color"
-          name="color" required>
-
-        <label for="imagen">Imagen:</label>
-        <input class="int" type="text" placeholder="Pegar url .pgp .jpg ..." id="color"
-          [(ngModel)]="nuevoProducto.imagen" name="imagen" required>
-
-        <button type="submit" class="btn" id="guardar"  >Guardar</button>
-        <button type="button" class="btn" id="cancelar" (click)="cancelarAgregar()">Cancelar</button>
-      </div>
-
-    </form>
-  </div>
-</div>
-
-<div *ngIf="mostrarSpinner" class="spinner-container">
-  <div class="loader">
-    <div></div>
-  </div>
-</div>
-
-<div class="cont-fat">
-  <div class="cont" *ngFor="let producto of productos">
-    <div *ngIf="cumpleCriterios(producto)">
-      <div class="text">
-
-        <div class="cont-info-bd">
-          <label>Referencia:</label>
-          <p>{{ producto.nombre }}</p>
+          <button class="btn" (click)="mostrarFormularioAgregar()" [disabled]="mostrarSpinner">Agregar bolso <i
+              _ngcontent-rty-c2="" class="fas fa-plus" id="icon-search"></i></button>
+          <button class="btn" id="close" (click)="logout()">Cerrar Sesión <i _ngcontent-rty-c2=""
+              class="fas fa-power-off" id="icon-search"></i></button>
         </div>
-
-        <div class="cont-info-bd">
-          <label>Precio:</label>
-          <p>{{ producto.precio }}</p>
-        </div> 
-
-        <div class="cont-info-bd">
-          <label>Colores:</label>
-          <p>{{ producto.color }}</p>
-        </div>
-
-      </div>
-      <div class="img">
-        <img src="{{ producto.imagen }}" alt="">
-      </div>
-      <div class="actions">
-        <button class="btn" id="editar" (click)="editarProducto(producto)">Editar</button>
-        <button class="btn" id="eliminar" (click)="eliminarProducto(producto._id)">Eliminar</button>
       </div>
     </div>
 
+    <div class="cont-form-agregar" *ngIf="mostrarFormularioAgregarFlag">
 
+      <div class="cont-form2">
 
-    <div *ngIf="productoEnEdicionId === producto._id">
-      <h4>Editar Producto</h4>
-      <form (submit)="guardarEdicion()">
+        <form (submit)="crearProducto()" enctype="multipart/form-data">
 
-        <div class="editar-form">
-
-          <div class="inputs">
+          <div class="form1">
             <label for="nombre">Nombre:</label>
-            <input class="int" type="text" id="nombre" [(ngModel)]="productoEnEdicion.nombre" name="nombre">
-          </div>
+            <input class="int" class="int" type="text" placeholder="Referencia" id="nombre" required
+              [(ngModel)]="nuevoProducto.nombre" name="nombre">
 
-          <div class="inputs">
             <label for="precio">Precio:</label>
-            <input class="int" type="text" id="precio" [(ngModel)]="productoEnEdicion.precio" name="precio">
-          </div>
+            <input class="int" type="number" placeholder="💲" id="precio" [(ngModel)]="nuevoProducto.precio" name="precio"
+              required>
 
-          <div class="inputs">
             <label for="color">Color:</label>
-            <input class="int" type="text" id="color" [(ngModel)]="productoEnEdicion.color" name="color">
-          </div>
+            <input class="int" type="text" placeholder="color separado por ," id="color" [(ngModel)]="nuevoProducto.color"
+              name="color" required>
 
-          <div class="inputs">
             <label for="imagen">Imagen:</label>
-            <input class="int" type="text" id="imagen" [(ngModel)]="productoEnEdicion.imagen" name="imagen">
+            <input type="file" class="btn" id="imagen" (change)="onFileChange($event)" accept="image/*"
+              required>
+
+
+            <button type="submit" class="btn" id="guardar">Guardar</button>
+            <button type="button" class="btn" id="cancelar" (click)="cancelarAgregar()">Cancelar</button>
           </div>
 
-          <div class="inputs">
-            <button class="btn" id="guardar" type="submit">Guardar Cambios</button>
-            <button class="btn" id="cancelar" type="button" (click)="cancelarEdicion()">Cancelar</button>
-          </div>
-
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-  </div>
-</div>
 
-</ng-template>
-</ng-template>
+    <div *ngIf="mostrarSpinner" class="spinner-container">
+      <div class="loader">
+        <div></div>
+      </div>
+    </div>
 
+    <div class="cont-fat">
+      <div class="cont" *ngFor="let producto of productosOrdenados">
+        <div *ngIf="cumpleCriterios(producto)">
+          <div class="text">
+
+            <div class="cont-info-bd">
+              <label>Referencia:</label>
+              <p>{{ producto.nombre }}</p>
+            </div>
+
+            <div class="cont-info-bd">
+              <label>Precio:</label>
+              <p>{{ producto.precio }}</p>
+            </div>
+
+            <div class="cont-info-bd">
+              <label>Colores:</label>
+              <p>{{ producto.color }}</p>
+            </div>
+
+          </div>
+          <div class="img">
+            <img [src]="producto.imagen" alt="">
+          </div>
+          <div class="actions">
+            <!-- <button class="btn" id="editar" (click)="editarProducto(producto)">Editar</button> -->
+            <button class="btn" id="eliminar" (click)="eliminarProducto(producto._id)">Eliminar</button>
+          </div>
+        </div>
+
+
+
+        <div *ngIf="productoEnEdicionId === producto._id">
+          <h4>Editar Producto</h4>
+          <form (submit)="guardarEdicion()" enctype="multipart/form-data">
+
+            <div class="editar-form">
+
+              <div class="inputs">
+                <label for="nombre">Nombre:</label>
+                <input class="int" type="text" id="nombre" [(ngModel)]="productoEnEdicion.nombre" name="nombre">
+              </div>
+
+              <div class="inputs">
+                <label for="precio">Precio:</label>
+                <input class="int" type="text" id="precio" [(ngModel)]="productoEnEdicion.precio" name="precio">
+              </div>
+
+              <div class="inputs">
+                <label for="color">Color:</label>
+                <input class="int" type="text" id="color" [(ngModel)]="productoEnEdicion.color" name="color">
+              </div>
+
+              <div class="inputs">
+                <label for="imagen">Imagen:</label>
+            <input type="file" class="form-control" id="imagen" (change)="onFileChange($event)" accept="image/*"
+              required>
+              </div>
+
+              <div class="inputs">
+                <button class="btn" id="guardar" type="submit">Guardar Cambios</button>
+                <button class="btn" id="cancelar" type="button" (click)="cancelarEdicion()">Cancelar</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+</ng-template>

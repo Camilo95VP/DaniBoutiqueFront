@@ -27,9 +27,10 @@ export class BolsosComponent implements OnInit {
   filtroColor: string = '';
   productos: Producto[] = [];
   noResults: boolean = false;
+  productosOrdenados: any[] = [];
 
   mostrarImagenGrandee(url: string) {
-     // Simula un retraso para mostrar el spinner de carga
+    // Simula un retraso para mostrar el spinner de carga
     this.imagenGrandeUrl = url;
     this.mostrarImagenGrande = true;
   }
@@ -42,17 +43,41 @@ export class BolsosComponent implements OnInit {
     private carritoService: CarritoService,
     private router: Router,
     private apiService: ApiServiceService
-    ) { }
+  ) { }
 
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false; // Indica que el contenido ha terminado de cargar
     }, 1000); // Cambia esto al tiempo que consideres adecuado
     // Obtener productos desde la base de datos usando el servicio
-  this.apiService.getProducts().subscribe((productos) => {
-    this.productos = productos;
-    this.isLoadingbd = false;
-  });
+    this.apiService.getProducts().subscribe((productos) => {
+      this.productos = productos;
+      this.isLoadingbd = false;
+      this.productosOrdenados = this.ordenarProductosPorNombre(this.productos)
+    });
+    
+  }
+
+  ordenarProductosPorNombre(productos: any[]): any[] {
+    const productosPorNombre: { [nombre: string]: any[] } = {};  
+    productos.forEach(producto => {
+      const nombre = producto.nombre;
+      if (!productosPorNombre[nombre]) {
+        productosPorNombre[nombre] = [];
+      }
+      productosPorNombre[nombre].push(producto);
+    });
+  
+    const productosOrdenados = [];
+  
+    for (const nombre in productosPorNombre) {
+      if (productosPorNombre.hasOwnProperty(nombre)) {
+        const productosConMismoNombre = productosPorNombre[nombre];
+        productosOrdenados.push(...productosConMismoNombre);
+      }
+    }
+  
+    return productosOrdenados;
   }
 
   generarOpcionesColores(colores: string[]): { [key: string]: string } {
@@ -97,7 +122,7 @@ export class BolsosComponent implements OnInit {
           this.carritoService.agregarProducto({ ...producto, color: colorSeleccionado });
           this.mostrarCarritoModal = true;
           this.router.navigate(['carrito']);
-          if (colorSeleccionado.length>=0) {
+          if (colorSeleccionado.length >= 0) {
             Swal.fire({
               title: 'Producto agregado con éxito al carrito',
               icon: 'success',
@@ -130,16 +155,16 @@ export class BolsosComponent implements OnInit {
   cumpleCriterios(producto: Producto): boolean {
     const referencia = this.filtroReferencia.toLowerCase().trim();
     const color = this.filtroColor.toLowerCase().trim();
-  
+
     if (referencia.length >= 2 && !producto.nombre.toLowerCase().includes(referencia)) {
       return false;
     }
-  
+
     if (color.length >= 2 && !producto.color.some(c => c.toLowerCase().includes(color))) {
       return false;
     }
-  
+
     return true;
   }
-  
+
 }

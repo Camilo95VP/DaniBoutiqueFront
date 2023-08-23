@@ -20,12 +20,13 @@ export class AdminComponent implements OnInit {
   productoEnEdicionId: string | null = null;
   filtroReferencia: string = '';
   mostrarSpinner: boolean = false;
+  productosOrdenados: any[] = [];
 
   nuevoProducto: any = {
     nombre: '',
     precio: '',
-    color: '',
-    imagen: null // Cambiar a null para permitir la carga de imágenes
+    color: [],
+    imagen: File // Cambiar a null para permitir la carga de imágenes
   };
 
   mostrarFormularioAgregarFlag: boolean = false;
@@ -58,7 +59,7 @@ export class AdminComponent implements OnInit {
 
   login() {
     // Simular autenticación (reemplaza esto con una lógica real)
-    if (this.username === 'Dani' && this.password === '1234') {
+    if (this.username === 'Dani' && this.password === 'Dani*03') {
       this.isLoggedIn = true;
       this.loginError = false; // Reiniciar el estado de error
       this.isLoading = true;
@@ -72,7 +73,29 @@ export class AdminComponent implements OnInit {
       this.clearLoginError();
     }
   }
-
+  
+  
+  ordenarProductosPorNombre(productos: any[]): any[] {
+    const productosPorNombre: { [nombre: string]: any[] } = {};  
+    productos.forEach(producto => {
+      const nombre = producto.nombre;
+      if (!productosPorNombre[nombre]) {
+        productosPorNombre[nombre] = [];
+      }
+      productosPorNombre[nombre].push(producto);
+    });
+  
+    const productosOrdenados = [];
+  
+    for (const nombre in productosPorNombre) {
+      if (productosPorNombre.hasOwnProperty(nombre)) {
+        const productosConMismoNombre = productosPorNombre[nombre];
+        productosOrdenados.push(...productosConMismoNombre);
+      }
+    }
+  
+    return productosOrdenados;
+  }
   clearLoginError() {
     setTimeout(() => {
       this.loginError = false;
@@ -90,10 +113,11 @@ export class AdminComponent implements OnInit {
   obtenerProductos(): void {
     this.apiService.getProducts().subscribe((productos) => {
       this.productos = productos;
+      this.productosOrdenados = this.ordenarProductosPorNombre(this.productos)
       this.isLoading = false;
     });
   }
-  
+
 
   editarProducto(producto: any) {
     this.productoEnEdicionId = producto._id;
@@ -101,7 +125,7 @@ export class AdminComponent implements OnInit {
     this.cdr.detectChanges(); // Detectar cambios
     console.log(producto)
   }
-  
+
   eliminarProducto(id: string) {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -137,16 +161,22 @@ export class AdminComponent implements OnInit {
       }
     })
   };
-  
+
   crearProducto() {
     this.mostrarSpinner = true;
     // Divide el campo color en un array de strings
-  this.nuevoProducto.color = this.nuevoProducto.color.split(',');
-  
-  this.apiService.crearProducto(this.nuevoProducto)
+    this.nuevoProducto.color = this.nuevoProducto.color.split(',');
+
+    // Crear un objeto FormData para enviar datos con archivos
+    const formData = new FormData();
+    formData.append('nombre', this.nuevoProducto.nombre);
+    formData.append('precio', this.nuevoProducto.precio);
+    formData.append('color', this.nuevoProducto.color);
+    formData.append('imagen', this.nuevoProducto.imagen); // Aquí asignamos el archivo de imagen
+
+    this.apiService.crearProducto(formData)
       .subscribe(
         (productoCreado) => {
-          console.log('Producto creado:', productoCreado);
           Swal.fire('¡Producto creado!', 'El producto se ha creado exitosamente.', 'success');
           this.obtenerProductos(); // Actualizar la lista de productos
           this.mostrarFormularioAgregarFlag = false; // Ocultar el formulario
@@ -154,25 +184,26 @@ export class AdminComponent implements OnInit {
             nombre: '',
             precio: '',
             color: '',
-            imagen: null
+            imagen: File
           };
           this.mostrarSpinner = false;
         },
-        
+
         (error) => {
           console.error('Error al crear el producto:', error);
+          console.log('Respuesta del servidor:', error.error); // Agregar esta línea
           Swal.fire('Error', 'Hubo un error al crear el producto.', 'error');
           this.mostrarSpinner = false;
         }
       );
   }
 
+
   guardarEdicion() {
     if (this.productoEnEdicion) {
       this.apiService.actualizarProducto(this.productoEnEdicion)
         .subscribe(
           (productoActualizado) => {
-            console.log('Producto actualizado:', productoActualizado);
             // Aquí puedes realizar cualquier acción adicional después de actualizar el producto
             this.obtenerProductos()
             this.productoEnEdicionId = null; // Ocultar el formulario de edición
@@ -189,28 +220,28 @@ export class AdminComponent implements OnInit {
     const file = event.target.files[0]; // Obtener el archivo seleccionado
     this.nuevoProducto.imagen = file; // Asignar el archivo al campo de imagen
   }
-  
+
   // ... 
-    
-  
+
+
   cancelarEdicion() {
     // Limpiar la edición
     this.productoEnEdicionId = null;
   }
 
-  cancelarAgregar(){
+  cancelarAgregar() {
     this.mostrarFormularioAgregarFlag = false;
   }
 
   cumpleCriterios(producto: Producto): boolean {
     const referencia = this.filtroReferencia.toLowerCase().trim();
-  
-  
+
+
     if (referencia.length >= 2 && !producto.nombre.toLowerCase().includes(referencia)) {
       return false;
     }
-  
-  
+
+
     return true;
   }
 
