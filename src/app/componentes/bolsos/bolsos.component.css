@@ -124,7 +124,7 @@ top: 10px;
     position: relative;
     top: 15px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     text-align: center;
     padding: 15px;
 }
@@ -250,7 +250,7 @@ button {
         bottom: 1px;
       }
     .cont-bolsos{
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(8, 1fr);
         display: grid;
         margin: 0 auto;
         width: 90%;
@@ -281,8 +281,10 @@ button {
     justify-content: center;
 }
 .imagen-producto{
-    width: 200px;
-    height: 310px;
+    /* width: 200px;
+    height: 310px; */
+    width: 70px;
+    height: 60px;
     border-radius: 9px;
     cursor: pointer;
     -webkit-box-shadow: 1px 1px 15px 3px rgba(0,0,0,1);
