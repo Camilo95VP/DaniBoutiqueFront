@@ -10,7 +10,7 @@ import { ApiServiceService } from '../apiService.service';
 @Component({
   selector: 'app-bolsos',
   templateUrl: './bolsos.component.html',
-  styleUrls: ['./bolsos.component.css']
+  styleUrls: ['./bolsos.component.css', './bolsos.component.style.css']
 })
 export class BolsosComponent implements OnInit {
 
