@@ -1,5 +1,6 @@
 <!-- carrito.component.html -->
 <div class="contenedor-principal">
+  <div class="app-carrito-contenido">
   <div class="cont-msj" *ngIf="carrito.length === 0">
     <p class="text-car">No tienes productos agragados al carrito.</p>
     <br>
@@ -31,8 +32,8 @@
     <div class="cont-btns">
       <button id="wpp" (click)="enviarPedido()">Enviar pedido por WhatsApp</button>
       <button id="vaciar" (click)="vaciarCarrito()">Vaciar carrito</button>
-      <button id="seguir" (click)="redirigirABolsos()">Seguir comprando</button>
+      <button id="seguir" (click)="redirigirABolsos()"><i _ngcontent-qjy-c2="" class="fas fa-long-arrow-alt-left"></i></button>
     </div>
   </div>
-
+</div>
 </div>

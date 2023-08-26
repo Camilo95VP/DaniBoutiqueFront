@@ -1,5 +1,8 @@
 <app-navBar></app-navBar>
-
+<div class="app-carrito-modal" [ngClass]="{'open': carritoAbierto}" >
+  <app-carrito></app-carrito>
+  <button class="btn-cerrar" (click)="cerrarCarrito()"><i _ngcontent-qjy-c2="" class="fas fa-times"></i></button>
+</div>
 <ng-container *ngIf="isLoadingbd; else content">
   <!-- Spinner de carga -->
   <div class="loading">
@@ -62,7 +65,7 @@
       <div class="especif">
         <p>REPITE CONMIGO <br> ¡MEREZCO UN BOLSO NUEVO!</p>
       </div>
-      <button class="btn-cerrar-mod" (click)="cerrarModal()">Cerrar</button>
+      <button id="cerrar" class="btn-cerrar-mod" (click)="cerrarModal()">Cerrar</button>
 
     </div>
   </div>

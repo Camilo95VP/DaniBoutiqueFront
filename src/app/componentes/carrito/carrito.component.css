@@ -1,3 +1,20 @@
+.contenedor-principal {
+    max-height: 80vh; 
+  width: 80%; 
+  background-color: #000000b9; 
+  padding: 20px; 
+  border-radius: 5px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  overflow: auto; 
+  position: relative; 
+  }
+  .app-carrito-contenido {
+    max-height: 80vh; 
+    width: 100%; 
+    background-color: #00000000; 
+    border-radius: 5px; 
+    overflow: auto; 
+  }
 .cont-msj{
     width: 100%;
     text-align: center;
@@ -32,9 +49,10 @@
     gap: 5px;
 }
 .contenedor-principal{
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
     padding: 20px;
+    margin-top: 45px;
 }
 .cont-producto{
     background-color: rgba(0, 0, 0, 0.437);
@@ -57,6 +75,9 @@
 }
 #seguir{
     background-color: rgba(0, 52, 84, 0.597);
+}
+#seguir i{
+    font-size:40px
 }
 
 #cant-span{
@@ -157,9 +178,6 @@ button {
     transition: none;
     transition-delay: none;
    }
-
-   
-
 @media (max-width: 858px){
     .cont-btns{
         margin-top: 10px;

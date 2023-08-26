@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent implements OnInit {
+  carritoAbierto: boolean = false;
 
   carrito: {
 imagen: any;
@@ -155,6 +156,10 @@ imagen: any;
 
   redirigirABolsos() {
     this.router.navigate(["/bolsos"])
+  }
+
+  cerrarCarrito() {
+    this.carritoAbierto = false;
   }
 
 }

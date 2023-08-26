@@ -28,6 +28,8 @@ export class BolsosComponent implements OnInit {
   productos: Producto[] = [];
   noResults: boolean = false;
   productosOrdenados: any[] = [];
+  carritoAbierto: boolean = false;
+
 
   mostrarImagenGrandee(url: string) {
     // Simula un retraso para mostrar el spinner de carga
@@ -121,7 +123,7 @@ export class BolsosComponent implements OnInit {
           const colorSeleccionado = result.value;
           this.carritoService.agregarProducto({ ...producto, color: colorSeleccionado });
           this.mostrarCarritoModal = true;
-          this.router.navigate(['carrito']);
+          this.abrirCarrito();
           if (colorSeleccionado.length >= 0) {
             Swal.fire({
               title: 'Producto agregado con éxito al carrito',
@@ -135,9 +137,9 @@ export class BolsosComponent implements OnInit {
     } else {
       this.carritoService.agregarProducto(producto);
       this.mostrarCarritoModal = true;
-      this.router.navigate(['carrito']);
+      this.abrirCarrito();
     }
-
+    this.abrirCarrito();
   }
 
 
@@ -165,6 +167,15 @@ export class BolsosComponent implements OnInit {
     }
 
     return true;
+  }
+
+
+  abrirCarrito() {
+    this.carritoAbierto = true;
+  }
+  
+  cerrarCarrito() {
+    this.carritoAbierto = false;
   }
 
 }
