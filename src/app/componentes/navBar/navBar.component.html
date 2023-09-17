@@ -7,15 +7,16 @@
   </a>
   <ul [class.open]="isMenuOpen">
       <li>
-        <select id="categories" [(ngModel)]="selectedCategory" (change)="navigateToCategory()">
+        <!-- <select id="categories" [(ngModel)]="selectedCategory" (change)="navigateToCategory()">
           <option value="">Seleccione una categoría</option>
           <option  class="opt" value="bolsos" >Bolsos</option>
           <option class="opt" value="ropa">Ropa</option>
           <option class="opt" value="tennis">Tennis</option>
-        </select></li>
-      <li><a href="#" (click)="closeMenu()">Inicio</a></li>
-      <li><a href="#" (click)="closeMenu()">Nosotros</a></li>
-      <li><a href="#" (click)="closeMenu()">Contacto</a></li>
+        </select></li> -->
+      <!-- <li><a href="#" (click)="closeMenu()">Inicio</a></li>
+      <li><a href="#" (click)="closeMenu()">Nosotros</a></li> -->
+      <!-- <li><a href="#" (click)="closeMenu()">Contacto</a></li> -->
+      <li><a class="bolsos" (click)="redirigirBolsos()">Bolsos</a></li>
       <li><a class="admin" (click)="redirigirAdmin()">Admin</a></li>
       <label class="shopping-car" (click)="redirigirACarrito()"><i class="fas fa-shopping-cart"></i></label>
       <span class="contador">{{ cantidadProductos | async }}</span>

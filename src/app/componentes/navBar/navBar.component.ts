@@ -54,4 +54,8 @@ export class NavBarComponent implements OnInit {
     this.router.navigate(['/admin']);
   }
 
+  redirigirBolsos(){
+    this.router.navigate(['/bolsos']);
+  }
+
 }

@@ -219,3 +219,7 @@ li a.active, li a:hover{
         }
      
 }
+
+.bolsos{
+    cursor: pointer;
+}
