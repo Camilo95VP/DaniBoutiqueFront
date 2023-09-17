@@ -1,12 +1,24 @@
 .container{
-    width: 60%;
-    margin-left: 100px;
-    margin-top: 200px;
+    height: 100vh;
+    background-image: url(../../../assets/conjunto-moda-casual-hermosa-mujer.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.cont-text{
+  background-color: rgba(0, 0, 0, 0.523);
+  width: 60%;
+  position: relative;
+  margin: 0 auto;
+  top:150px;
+  border-radius: 10px;
+}
+.container-2{
+  padding:20px
 }
 
 @media only screen and (max-width: 510px) {
   .container{
-    width: 98%;
+    width: 100%;
     margin: 0;
   }
   .container h1{
@@ -15,5 +27,8 @@
   .cont-text{
     padding: 40px;
     margin-top: 50px;
+}
+.container-2{
+  padding:0px
 }
 }
